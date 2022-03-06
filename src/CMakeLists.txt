@@ -74,21 +74,21 @@ target_include_directories(
 
 # CommonLib
 if(${SKYRIM_AE})
-	add_subdirectory("${ROOT_DIR}/CommonLib/AE" CommonLibSSE EXCLUDE_FROM_ALL)
+	# add_subdirectory("${ROOT_DIR}/CommonLib/AE" CommonLibSSE EXCLUDE_FROM_ALL)
     target_link_libraries(
         "${PROJECT_NAME}"
         PUBLIC
             CommonLibSSE::CommonLibSSE
     )
 elseif(${SKYRIM_SE})
-	add_subdirectory("${ROOT_DIR}/CommonLib/SE" CommonLibSSE EXCLUDE_FROM_ALL)
+	# add_subdirectory("${ROOT_DIR}/CommonLib/SE" CommonLibSSE EXCLUDE_FROM_ALL)
     target_link_libraries(
         "${PROJECT_NAME}"
         PUBLIC
             CommonLibSSE::CommonLibSSE
     )
 elseif(${SKYRIM_VR})
-	add_subdirectory("${ROOT_DIR}/CommonLib/VR" CommonLibVR EXCLUDE_FROM_ALL)
+	# add_subdirectory("${ROOT_DIR}/CommonLib/VR" CommonLibVR EXCLUDE_FROM_ALL)
     target_link_libraries(
         "${PROJECT_NAME}"
         PUBLIC
@@ -99,6 +99,13 @@ endif()
 # Include spdlog
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PUBLIC spdlog::spdlog)
+
+# SkyUnit
+target_link_libraries("${PROJECT_NAME}" PUBLIC SkyUnit)
+
+# Snowhouse
+find_path(SNOWHOUSE_INCLUDE_DIRS "snowhouse/assert.h")
+target_include_directories("${PROJECT_NAME}" PRIVATE ${SNOWHOUSE_INCLUDE_DIRS})
 
 # Precompiled Headers (PCH)
 target_precompile_headers(
